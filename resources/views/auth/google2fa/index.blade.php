@@ -8,7 +8,7 @@
                     <div class="card-header">Register</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('2fa') }}">
+                        <form method="POST" action="{{ route('google2fa.validate') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group">

@@ -14,10 +14,15 @@
                 </div>
                 <div class="col-md-6">
                     @if(auth()->check() && auth()->id() == $id)
-                        @subscriber
-                        <a href="{{ route('subscription.index') }}" class="btn btn-success float-right">Current Plan</a>
+                        @if(is_null(auth()->user()->google2fa_secret))
+                            <a href="{{ route('google2fa.enable') }}" class="btn btn-primary float-right">Enable 2FA</a>
                         @else
-                        <a href="{{ route('subscription.create') }}" class="btn btn-success float-right">Subscribe</a>
+                            <a href="{{ route('google2fa.disable') }}" class="btn btn-warning float-right">Disable 2FA</a>
+                        @endif
+                        @subscriber
+                            <a href="{{ route('subscription.index') }}" class="btn btn-success float-right">Current Plan</a>
+                        @else
+                            <a href="{{ route('subscription.create') }}" class="btn btn-success float-right">Subscribe</a>
                         @endsubscriber
                     @endif
                 </div>

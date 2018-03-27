@@ -36,6 +36,9 @@ class User extends Authenticatable
 
     public function getGoogle2faSecretAttribute($value)
     {
+        if($this->attributes['google2fa_secret'] == null) {
+            return null;
+        }
         return decrypt($value);
     }
 

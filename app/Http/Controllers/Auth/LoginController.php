@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Provider;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use PragmaRX\Google2FALaravel\Google2FA;
+
 
 class LoginController extends Controller
 {
@@ -38,6 +42,38 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function getValidateToken()
+    {
+        if (session('2fa:user:id')) {
+            return view('auth.google2fa.index');
+        }
+
+        return redirect('login');
+
+    }
+
+    public function validate2FA(Request $request)
+    {
+        $this->validate($request,[
+            'one_time_password' => 'required|digits:6'
+        ]);
+        $userId = $request->session()->get('2fa:user:id');
+        $secret = User::find($userId)->google2fa_secret;
+
+        $fa = app('pragmarx.google2fa');
+
+        if($fa->verifyKey($secret,$request->input('one_time_password'))) {
+            Auth::loginUsingId($userId);
+
+            return redirect()->intended($this->redirectTo);
+        }
+        else {
+            session()->flash('message','Not A Valid Key');
+
+            return back();
+        }
     }
 
     public function redirectToProvider($provider)

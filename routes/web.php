@@ -12,11 +12,15 @@ Route::get('/logout','HomeController@destroy');
 
 Auth::routes();
 
+Route::get('account/google2fa/enable','Auth\RegisterController@register2FA')->name('google2fa.enable');
+
 Route::get('/complete-registration', 'Auth\RegisterController@completeRegistration');
 
-Route::post('/2fa', function () {
-    return redirect(URL()->previous());
-})->name('2fa')->middleware('2fa');
+Route::get('account/google2fa/disable','Auth\RegisterController@disable2FA')->name('google2fa.disable');
+
+Route::get('account/google2fa/validate','Auth\LoginController@getValidateToken')->name('google2fa.validateToken');
+
+Route::post('account/google2fa/validate','Auth\LoginController@validate2FA')->name('google2fa.validate');
 
 //Movie
 
@@ -51,7 +55,7 @@ Route::get('user/invoice/{invoice}', function (Request $request, $invoiceId) {
 
 Route::patch('/user/{id}','UserController@update')->name('user.update');
 
-Route::get('/user/{id}','UserController@show');
+Route::get('/user/{id}','UserController@show')->name('user.show');
 
 Route::get('/user/{id}/edit','UserController@edit');
 
