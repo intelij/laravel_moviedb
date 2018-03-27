@@ -41,7 +41,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout','validate2FA','getValidateToken');
     }
 
     public function getValidateToken()
@@ -67,6 +67,8 @@ class LoginController extends Controller
         if($fa->verifyKey($secret,$request->input('one_time_password'))) {
             Auth::loginUsingId($userId);
 
+            session()->put('auth_passed', true);
+
             return redirect()->intended($this->redirectTo);
         }
         else {
@@ -90,6 +92,7 @@ class LoginController extends Controller
             $userId = Provider::where('provider_id',$user->id)->first()->user_id;
 
             $logUser = User::find($userId);
+
             auth()->login($logUser);
 
             return redirect()->home();

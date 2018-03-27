@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\Check2FA;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -59,5 +60,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         '2fa' => \PragmaRX\Google2FALaravel\Middleware::class,
+        'g2fa' => Check2FA::class,
     ];
 }

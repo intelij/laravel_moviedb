@@ -153,5 +153,11 @@ Route::get('/test/login','Test@redirectToProvider');
 
 Route::get('/twitter','Test@handleProviderCallback');
 
+Route::get('/flush',function (Request $request){
+    session(['auth_passed' => false]);
+
+    return redirect()->route('user.show',$request->user()->id);
+});
+
 
 
