@@ -1,0 +1,41 @@
+.latestMoviesPreview a {
+    height: 300px!important;
+    width:100%;
+    display: inline-block;
+    overflow: hidden;
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
+.ratings_stars {
+    background: url('/storage/images/brand/star_empty.png') no-repeat;
+    background-size: contain;
+    float:      left;
+    height:     28px;
+    padding:    2px;
+    width:      32px;
+}
+.ratings_vote {
+    background: url('/storage/images/brand/star_filled.png') no-repeat;
+    background-size: contain;
+}
+
+#flash-message {
+    bottom: 0px;
+    position: fixed;
+    right: 0px;
+    z-index: 10;
+    animation: flash-message 15s forwards;
+}
+
+@keyframes flash-message {
+    0%   {opacity: 1;}
+    100% {opacity: 0; display:none;}
+}
+
+.movie-list-remove {
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+}
