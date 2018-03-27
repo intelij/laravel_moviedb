@@ -21,9 +21,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers {
-        register as registration;
-    }
+    use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
@@ -73,7 +71,7 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function register(Request $request)
+   /* public function register(Request $request)
     {
         $this->validator($request->all())->validate();
 
@@ -101,5 +99,5 @@ class RegisterController extends Controller
 
         // Call the default laravel authentication
         return $this->registration($request);
-    }
+    }*/
 }
