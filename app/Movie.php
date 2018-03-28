@@ -5,9 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use Laravel\Scout\Searchable;
 
 class Movie extends Model
 {
+
+    use Searchable;
+
 
     protected $fillable = [
         'title',
@@ -51,6 +55,22 @@ class Movie extends Model
     public function wishlists()
     {
         return $this->belongsToMany(Wishlist::class);
+    }
+
+    public function toSearchableArray()
+    {
+        /**
+         * Load the categories relation so that it's available
+         *  in the laravel toArray method
+         */
+
+        $this->genres;
+        $this->actors;
+        $this->ratings;
+
+
+
+        return $this->toArray();
     }
 
     public static function top()

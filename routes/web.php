@@ -126,6 +126,10 @@ Route::get('account/invoice/{invoice}', function (Request $request, $invoiceId) 
     ]);
 });
 
+//the Search routes
+
+Route::get('/search','SearchController@index')->name('search.index');
+
 
 //Routes for testing purposes
 
