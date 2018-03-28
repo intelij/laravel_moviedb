@@ -93,6 +93,12 @@ class LoginController extends Controller
 
             $logUser = User::find($userId);
 
+            if($logUser->google2fa_secret) {
+                session()->put('2fa:user:id',$userId);
+
+                return redirect()->route('google2fa.validateToken');
+            }
+
             auth()->login($logUser);
 
             return redirect()->home();

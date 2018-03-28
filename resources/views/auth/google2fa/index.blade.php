@@ -14,13 +14,13 @@
                             <div class="form-group">
                                 <label for="one_time_password" class="control-label">One Time Password</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 mx-auto">
                                     <input id="one_time_password" type="number" class="form-control" name="one_time_password" required autofocus>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-6">
+                                <div class="col-md-6 mx-auto">
                                     <button type="submit" class="btn btn-dark">
                                         Login
                                     </button>
