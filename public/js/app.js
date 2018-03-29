@@ -22713,6 +22713,11 @@ window.Vue = __webpack_require__(184);
 
 
 
+
+
+
+
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_instantsearch__["a" /* default */]);
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_instantsearch__["a" /* default */]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to

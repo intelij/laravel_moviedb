@@ -11,7 +11,12 @@ window.Vue = require('vue');
 
 import InstantSearch from 'vue-instantsearch';
 
+import AlgoliaComponents from 'vue-instantsearch';
+
+import Index from 'vue-instantsearch';
+
 Vue.use(InstantSearch);
+Vue.use(AlgoliaComponents);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -25,4 +30,6 @@ $(document).ready(function () {
     const app = new Vue({
         el: '#app'
     });
+
+
 });
