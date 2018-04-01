@@ -96,7 +96,7 @@
         <div class="row">
             <div class="col-md-4.push-right">
                 <iframe id="player" type="text/html" width="100%" height="200px"
-                        src="http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com"
+                        src="http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=https://moviesdb.oo/"
                         frameborder="0"></iframe>
             </div>
             <div class="col-md-8">

@@ -66,11 +66,22 @@ class Movie extends Model
 
         $this->genres;
         $this->actors;
-        $this->ratings;
+        $finalRating = 0;
 
+        foreach ($this->ratings as $rating) {
+            $finalRating+=$rating->rating;
+        }
 
+        $divideBy = $this->ratings->count();
 
-        return $this->toArray();
+        if( $divideBy != 0 ) {
+            $finalRating/=$divideBy;
+        }
+
+        $array = $this->toArray();
+        $array['rating'] = ceil($finalRating);
+
+        return $array;
     }
 
     public static function top()

@@ -20,6 +20,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "instantsearch.js": "^2.6.1",
         "vue-instantsearch": "^1.5.2"
     }
 }

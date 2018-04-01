@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Movie;
 use Egulias\EmailValidator\Exception\ExpectingCTEXT;
 use Illuminate\Http\Request;
 use App\User;
@@ -215,21 +216,26 @@ class UserController extends Controller
         if(auth()->check() && User::subscriber()) {
 
             if(auth()->user()->ratings->where('movie_id','=',$request->input('mid'))->count() > 0) {
-                DB::table('ratings')
+                $rating = DB::table('ratings')
                     ->where('user_id',auth()->id())
                     ->where('movie_id', $request->input('mid'))
                     ->update([
                         'rating' => $request->input('rating'),
                         'updated_at' => now()
                     ]);
+
+                Movie::find($request->input('mid'))->searchable();
+
             } else {
 
                 try {
-                    Rating::create([
+                    $rating = Rating::create([
                         'rating' => $request->input('rating'),
                         'user_id' => auth()->id(),
                         'movie_id' => $request->input('mid')
                     ]);
+
+                    $rating->movie->searchable();
                 } catch (Exception $e) {
                     return $e;
                 }

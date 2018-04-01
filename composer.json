@@ -7,6 +7,7 @@
     "require": {
         "php": ">=7.1.3",
         "algolia/algoliasearch-client-php": "^1.25",
+        "algolia/laravel-scout-settings": "^2.0",
         "bacon/bacon-qr-code": "^1.0",
         "doctrine/dbal": "^2.6",
         "fideloper/proxy": "~4.0",

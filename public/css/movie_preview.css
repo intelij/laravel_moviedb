@@ -52,7 +52,7 @@
   margin-right: 18px;
 }
 
-.ais-results {
-  width: 100%;
+.ais-hits--item {
+  display: inline-block;
 }
 

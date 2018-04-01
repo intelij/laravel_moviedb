@@ -165,6 +165,8 @@ class MovieController extends Controller
                 Movie::findOrFail($movie_id)->genres()->attach($request->input('current_genres'));
             }
 
+            Movie::find($movie_id)->searchable();
+
             session()->flash('message','Move has been updated');
 
             return redirect('admin');
@@ -217,6 +219,8 @@ class MovieController extends Controller
                 Movie::find($movie)->genres()->attach($genre);
             }
         }
+
+        Movie::find($movie)->searchable();
 
         session()->flash('message','Movie Created Successfully.');
 

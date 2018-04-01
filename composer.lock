@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b99c4e1fe05a1e80a3eec9da7aa74e80",
+    "content-hash": "0b036e122f8adcf9ed3de8b3dc6db8c9",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -55,6 +55,60 @@
             "description": "Algolia Search API Client for PHP",
             "homepage": "https://github.com/algolia/algoliasearch-client-php",
             "time": "2018-03-02T13:24:10+00:00"
+        },
+        {
+            "name": "algolia/laravel-scout-settings",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/algolia/laravel-scout-settings.git",
+                "reference": "d7becc4ba9f2f3581860d2e2fe3055df0799d76d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/algolia/laravel-scout-settings/zipball/d7becc4ba9f2f3581860d2e2fe3055df0799d76d",
+                "reference": "d7becc4ba9f2f3581860d2e2fe3055df0799d76d",
+                "shasum": ""
+            },
+            "require": {
+                "algolia/algoliasearch-client-php": "^1.25",
+                "laravel/scout": "^3.0 || ^4.0"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "^1.6",
+                "orchestra/testbench": "^3.4",
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Algolia\\Settings\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Algolia\\Settings\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Julien Bourdeau",
+                    "email": "julien.bourdeau@algolia.com"
+                }
+            ],
+            "description": "Import/Export Algolia settings into your Laravel Scout project",
+            "keywords": [
+                "algolia",
+                "laravel",
+                "search"
+            ],
+            "time": "2018-03-21T16:38:09+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",

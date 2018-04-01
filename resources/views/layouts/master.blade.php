@@ -11,6 +11,10 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/all.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/movie_preview.css')}}">
 
+    {{--algolia search css--}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.2/dist/instantsearch.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.2/dist/instantsearch-theme-algolia.min.css">
+
 
     <script src="{{asset('js/app.js')}}"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
