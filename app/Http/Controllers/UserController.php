@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Movie;
-use Egulias\EmailValidator\Exception\ExpectingCTEXT;
 use Illuminate\Http\Request;
 use App\User;
 use App\Rating;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Mockery\Exception;
-use Laravel\Socialite\Facades\Socialite;
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
@@ -83,8 +83,17 @@ class UserController extends Controller
     {
         $user =  User::findOrFail($id);
         $wishlists = $user->wishlists;
+        $avatarUrl = '/storage/images/brand/Plus-sign.png';
 
-        return view('user.show',compact('wishlists','user','id'));
+        $hasAvatar = $user->hasAvatar($id);
+
+        if($hasAvatar) {
+            $avatarUrl = '/storage/avatars/'.$id.'.jpg';
+        }
+
+
+
+        return view('user.show',compact('wishlists','user','id','avatarUrl'));
     }
 
     /**
@@ -246,5 +255,49 @@ class UserController extends Controller
             return response('Rating created',200);
         }
         return redirect('home');
+    }
+
+    public function showAvatarForm($id)
+    {
+        $hasAvatar = auth()->user()->hasAvatar($id);
+        return view('user.avatar',compact('id','hasAvatar'));
+    }
+
+    public function avatar(Request $request)
+    {
+        $id = $request->user()->id;
+        $file = $request->file('avatar');
+        $type = $file->getMimeType();
+        $size = $file->getSize();
+        $path = $file->getPathname();
+
+
+        if( $type !== 'image/jpeg' && $type !== 'image/png' ) {
+            session()->flash('message','Please put a valid image!');
+
+            return redirect()->back();
+        }
+
+        if( $size <= 1024 ) {
+            session()->flash('message','Please put a valid image!');
+
+            return redirect()->back();
+        }
+
+        if( $size > 5*1024*1024 ) {
+            session()->flash('message','Maximum size is 5MB!');
+
+            return redirect()->back();
+        }
+
+        $img = Image::make($file);
+
+        $img->fit(150);
+
+        $img->save(storage_path('app/public/avatars/'.$id.'.jpg'));
+
+        session()->flash('message','Your avatar has been updated!');
+
+        return redirect()->route('user.show',$id);
     }
 }

@@ -8,6 +8,17 @@
             <h3>User Profile</h3>
             <hr>
             <div class="row">
+                <div class="col-md-3">
+                    @if(auth()->check() && auth()->id() == $id)
+                        <a href="{{ route('user.showAvatar',$id) }}">
+                            <img src="{{ $avatarUrl }}" style="max-height: 10em" class="img-fluid">
+                        </a>
+                    @else
+                        <img src="{{ $avatarUrl }}" style="max-height: 10em" class="img-fluid">
+                    @endif
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6">
                     <p>Name: {{ $user->name }}</p>
                     <p>Email: {{ $user->email }}</p>

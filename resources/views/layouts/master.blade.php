@@ -22,7 +22,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/brands.js" integrity="sha384-sCI3dTBIJuqT6AwL++zH7qL8ZdKaHpxU43dDt9SyOzimtQ9eyRhkG3B7KMl6AO19" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container-fluid" id="app">
+    <div class="container-fluid">
         <div class="row justify-content-md-center">
             <div class="col-md-8">
                 @include('layouts.navbar')

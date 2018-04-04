@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Recommend;
+use Illuminate\Support\Facades\Storage;
 
 
 Route::get('/','HomeController@index');
@@ -32,6 +33,14 @@ Route::resource('movie', 'MovieController');
 
 Route::get('/admin','AdminController@index')->name('admin');
 
+Route::get('/admin/movies','AdminController@showMoviesPanel')->name('admin.movies');
+
+Route::get('/admin/users','AdminController@showUsersPanel')->name('admin.users');
+
+Route::get('/admin/actors','AdminController@showActorsPanel')->name('admin.actors');
+
+Route::get('/admin/genres','AdminController@showGenresPanel')->name('admin.genres');
+
 Route::post('/admin/sync','AdminController@sync');
 
 Route::post('/admin/syncAll','AdminController@syncAll');
@@ -59,6 +68,10 @@ Route::get('/user/{id}','UserController@show')->name('user.show');
 
 Route::get('/user/{id}/edit','UserController@edit');
 
+Route::get('/user/{id}/avatar','UserController@showAvatarForm')->name('user.showAvatar');
+
+Route::post('/user/avatar','UserController@avatar')->name('user.avatar');
+
 Route::delete('/user/delete','UserController@destroy')->name('user.destroy');
 
 Route::get('/login/{provider}','Auth\LoginController@redirectToProvider')->name('user.provider');
@@ -80,6 +93,7 @@ Route::delete('/actor/delete','ActorController@destroy')->name('actor.destroy');
 Route::get('/actor/{id}/edit','ActorController@edit')->name('actor.edit');
 
 Route::patch('/actor/{id}','ActorController@update')->name('actor.update');
+
 
 //Genres
 
@@ -137,6 +151,11 @@ Route::get('/test/roles',function () {
     return view('test.roles');
 });
 
+Route::get('/test/image',function () {
+    return public_path('\images\brand\Plus-sign.png');
+    return storage_path('public\app\images\brand\Plus-sign.png');
+});
+
 Route::get('/test/recommended',function () {
 
     $array = \App\Movie::recommenderArray();
@@ -161,6 +180,16 @@ Route::get('/flush',function (Request $request){
     session(['auth_passed' => false]);
 
     return redirect()->route('user.show',$request->user()->id);
+});
+
+Route::get('/test/image',function () {
+    $contents = file_get_contents('https://en.wikipedia.org/wiki/Karina_Arroyave');
+    $fullName = [];
+
+
+    preg_match('/1[0-9]{3}-[0-9]{2}-[0-9]{2}/',$contents,$fullName);
+
+    dd($fullName);
 });
 
 

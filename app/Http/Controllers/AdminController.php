@@ -11,11 +11,6 @@ use App\Admin;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -27,15 +22,22 @@ class AdminController extends Controller
             return redirect('home');
         }
 
+        return view('admin.index',compact('actors','genres'));
+
+    }
+
+
+    public function sync(Request $request)
+    {
+        return Admin::syncSingle($request);
+    }
+
+    public function showMoviesPanel()
+    {
+
         $stripedMovies = Movie::all()->pluck('imbdId');
 
         $movies = [];
-
-        $users = User::all();
-
-        $actors = Actor::all();
-
-        $genres = Genre::all();
 
         foreach ($stripedMovies as $movie) {
             array_push($movies,$movie);
@@ -49,79 +51,30 @@ class AdminController extends Controller
             $moviesToEdit = Movie::where('added_by','=', auth()->id())->get();
         }
 
-        return view('admin.index',compact('movies','moviesToEdit','users','actors','genres'));
-
+        return view('admin.movies',compact('movies','moviesToEdit'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function showUsersPanel()
     {
+        $users = User::all();
 
+        return view('admin.users',compact('users'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function showActorsPanel()
     {
+        $actors = Actor::all();
 
+        return view('admin.actors',compact('actors'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function showGenresPanel()
     {
-        //
+        $genres = Genre::all();
+
+        return view('admin.genres',compact('genres'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    public function sync(Request $request)
-    {
-        return Admin::syncSingle($request);
-    }
 
 }

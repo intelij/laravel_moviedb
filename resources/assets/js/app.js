@@ -75,6 +75,7 @@ $(document).ready(function () {
         attributeName: 'actors.name',
         sortBy: ['isRefined','name:desc'],
         limit: 10,
+        operator: 'and',
         searchForFacetValues: {
             placeholder: 'Search for actors',
             escapeFacetValues: true

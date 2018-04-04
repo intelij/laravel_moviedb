@@ -17,7 +17,7 @@ class MovieController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth','2fa'])->except('show');
+        $this->middleware(['auth'])->except('show');
     }
 
     public function index()

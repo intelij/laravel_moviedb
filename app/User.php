@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Cashier\Billable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -108,6 +109,10 @@ class User extends Authenticatable
             }
         }
         return false;
+    }
+
+    public function hasAvatar($id) {
+        return Storage::exists('public/avatars/'.$id.'.jpg');
     }
 
 }
